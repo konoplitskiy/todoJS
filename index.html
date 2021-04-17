@@ -5,12 +5,75 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>ToDo</title>
+    <title>ToDo 📋</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
 </head>
 
 <body>
+    <div class="todo-wrapper">
+        <h1 class="todo-title">Welcome to the task list</h1>
+        <div class="todo-container">
+            <div class="task-add">
+                <span class="task-add__title">Task add</span>
+                <button class="task-add__btn">+</button>
+            </div>
+            <nav class="task-filter">
+                <ul class="task-filter-list">
+                    <li class="task-filter-list__item">
+                        <button class="task-filter-list__btn is-active" data-tasks="all">All</button>
+                    </li>
+                    <li class="task-filter-list__item">
+                        <button class="task-filter-list__btn" data-tasks="open">Open</button>
+                    </li>
+                    <li class="task-filter-list__item">
+                        <button class="task-filter-list__btn" data-tasks="closed">Closed</button>
+                    </li>
+                </ul>
+            </nav>
+            <ul class="todo-list">
+            </ul>
+        </div>
+        <span class="todo-version">v 0.0.1</span>
+    </div>
 
+    <!-- todo modal -->
+    <div class="todo-modal">
+        <div class="todo-modal__inner">
+            <button class="todo-modal__close">&times;</button>
+            <div class="todo-modal-popUp">
+                <input class="todo-modal-popUp__field" type="text">
+                <!-- <span class="error-field">*Поле не может быть пустым</span> -->
+                <div class="todo-modal-popUp__footer">
+                    <div class="smile">
+                        <button class="smile__open-btn">
+                            <svg width="30" height="30" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10 0C4.48593 0 0 4.48593 0 10.0002C0 15.5137 4.48593 20 9.99982 20C15.5135 20 19.9998 15.5135 19.9998 10.0002C20 4.48593 15.5135 0 10 0ZM10 19.0002C5.0381 19.0002 0.999946 14.9621 0.999946 10.0002C0.999946 5.0381 5.03792 0.999946 10 0.999946C14.9621 0.999946 19.0002 5.03792 19.0002 10.0002C19.0001 14.9621 14.9619 19.0002 10 19.0002ZM16.4112 11.1358C16.3165 11.0157 16.1719 10.9455 16.0177 10.9455H3.98105C3.8281 10.9455 3.68301 11.0158 3.58771 11.1358C3.49294 11.2559 3.45885 11.4131 3.49419 11.5625C4.21573 14.5841 6.89112 16.6953 9.99875 16.6953C13.1053 16.6953 15.7793 14.5862 16.5037 11.5625C16.541 11.4131 16.506 11.2559 16.4112 11.1358ZM10 15.6954C7.57322 15.6954 5.45714 14.1818 4.65101 11.9453H15.3477C14.5411 14.1818 12.4248 15.6954 10 15.6954ZM5.66291 6.48921C5.66291 5.80426 6.21919 5.25012 6.90182 5.25012C7.58482 5.25012 8.14002 5.80426 8.14002 6.48921C8.14002 7.17292 7.58464 7.72795 6.90182 7.72795C6.21919 7.72812 5.66291 7.17292 5.66291 6.48921ZM11.8598 6.48921C11.8598 5.80426 12.4139 5.25012 13.098 5.25012C13.7796 5.25012 14.3353 5.80426 14.3353 6.48921C14.3353 7.17292 13.7772 7.72795 13.098 7.72795C12.4139 7.72812 11.8598 7.17292 11.8598 6.48921Z"
+                                    fill="#9A9A9A" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="todo-modal-popUp__action">
+                        <button class="todo-modal-popUp__add" type="button">Add</button>
+                        <button class="todo-modal-popUp__close" type="button">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- todo modal end-->
 
     <script src="app.js"></script>
 </body>
