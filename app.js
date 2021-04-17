@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     const filterNav = document.querySelector('.task-filter-list');
     const dataTasks = document.querySelectorAll('[data-tasks]');
 
-    console.log(dataTasks)
 
     let listTask = [];
     let audio = new Audio('pencil.mp3')
@@ -33,6 +32,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
             <li class="todo-list__item ${element.status == 'is-completed' ? 'is-completed': ''}">
                 <span class="todo-list__value">${element.value}</span>
                 <div class="todo-list__action">
+                    ${element.status == 'is-completed' ? '' : 
+                    `
                     <button class="todo-list__completed">
                         <svg width="19" height="14" viewBox="0 0 19 14" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -41,6 +42,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
                                 fill="white" />
                         </svg>
                     </button>
+                    `
+                    }
                     <button class="todo-list__remove">
                         <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -69,9 +72,30 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
     function showListItems() {
-        toDoList.innerHTML = '';
         listTask = getLocalStorage();
-        listTask.forEach(createList);
+
+        dataTasks.forEach(function (item) {
+            if (item.getAttribute('data-tasks') === 'open' && item.classList.contains('is-active')) {
+                toDoList.innerHTML = '';
+                let tasksOpen = listTask.filter(function (item) {
+                    return item.status === 'new'
+                })
+
+                tasksOpen.forEach(createList)
+
+            } else if (item.getAttribute('data-tasks') === 'closed' && item.classList.contains('is-active')) {
+                let tasksOpen = listTask.filter(function (item) {
+                    return item.status === 'is-completed'
+                })
+                toDoList.innerHTML = '';
+                tasksOpen.forEach(createList);
+
+            } else if (item.getAttribute('data-tasks') === 'all' && item.classList.contains('is-active')) {
+                toDoList.innerHTML = '';
+                listTask.forEach(createList);
+            }
+        })
+
     }
 
     showListItems();
@@ -155,29 +179,27 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     })
 
+
     // filter tasks
     filterNav.addEventListener('click', function (event) {
         let target = event.target;
         if (target.getAttribute('data-tasks') === 'open') {
+
+
             dataTasks.forEach(function (item) {
                 item.classList.remove('is-active')
             })
             target.classList.add('is-active')
-            let tasksOpen = listTask.filter(function (item) {
-                return item.status === 'new'
-            })
-            toDoList.innerHTML = '';
-            tasksOpen.forEach(createList);
+            showListItems();
+
         } else if (target.getAttribute('data-tasks') === 'closed') {
+
             dataTasks.forEach(function (item) {
                 item.classList.remove('is-active')
             })
             target.classList.add('is-active')
-            let tasksOpen = listTask.filter(function (item) {
-                return item.status === 'is-completed'
-            })
-            toDoList.innerHTML = '';
-            tasksOpen.forEach(createList);
+            showListItems();
+
         } else {
             dataTasks.forEach(function (item) {
                 item.classList.remove('is-active')
